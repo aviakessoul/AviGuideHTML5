@@ -1,0 +1,39 @@
+<!html>
+<html>
+<head>
+	<style>
+		.wrapper{			
+			width: 400px;			
+			position:fixed;			
+			height:400px;			
+			background-color:green;			
+		}
+		.mainContainer{
+			position:absolute;
+			width: 200px;
+			height:200px;
+			background-color:blue;			
+		}
+		header{
+			height:100px;
+			width:100%;
+			background-color:gray;
+		}
+		footer{
+			height:2000px;
+			position:relative;
+			left:600px;			
+		}
+	</style>
+</head>
+<body>
+	<header>static
+	</header>
+	<div class="wrapper"><span style="float:right">fixed</span>
+		<div class="mainContainer">absolute
+		</div>
+	</div>
+	<footer>relative
+	</footer>
+</body>
+</html>
