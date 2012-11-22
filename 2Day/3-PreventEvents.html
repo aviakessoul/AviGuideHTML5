@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>    
+    <title></title>
+    <style>
+        #divRegularBehaviour1
+        {
+            width:100px;
+            height:100px;
+            background-color:yellow;
+        }
+        #divRegularBehaviour2
+        {
+            width:50px;
+            height:50px;
+            background-color:green;
+        }
+        #divFalseBehaviour1
+        {
+            width:100px;
+            height:100px;
+            background-color:yellow;
+        }
+        #divFalseBehaviour2
+        {
+            width:50px;
+            height:50px;
+            background-color:green;
+        }    
+        #divStopeProagation1
+        {
+            width:100px;
+            height:100px;
+            background-color:yellow;
+        }
+        #divStopeProagation2
+        {
+            width:50px;
+            height:50px;
+            background-color:green;
+        }        
+    </style>
+    <script src="Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var id1 = 0;
+            $('#divRegularBehaviour2').click(function (e) {
+                id1++;
+                alert("click " + id1)
+            });
+            $('#divRegularBehaviour1').click(function (e) {
+                id1++;
+                alert("click " + id1)
+            });
+            var id2 = 0;
+            $('#divFalseBehaviour2').click(function (e) {
+                return false;
+            });
+            $('#divFalseBehaviour1').click(function (e) {
+                id2++;
+                alert("click " + id2)
+            });
+            var id3 = 0;
+            $('#divStopeProagation1').click(function (e) {
+                e.preventDefault()
+            });
+            $('#divStopeProagation2').click(function (e) {
+                id3++;
+                alert("click " + id3)
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="divRegularBehaviour1" >
+        <div id="divRegularBehaviour2">
+            
+        </div>
+    </div>
+    <div id="divFalseBehaviour1">
+        <div id="divFalseBehaviour2">
+        </div>
+    </div>
+    <div id="divStopeProagation1">
+        <div id="divStopeProagation2">
+        </div>
+    </div>
+</body>
+</html>

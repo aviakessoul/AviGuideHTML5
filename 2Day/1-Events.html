@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>    
+    <title></title>
+    <style>
+        .clicker
+        {
+            width:100px;
+            height:100px;
+            background-color:yellow;
+        }
+        .inlineEvent
+        {
+            background-color:Green;
+        }
+        .simpleEvent
+        {
+            background-color:Blue;
+        }
+        .jQueryEvent
+        {
+            background-color:Red;
+        }
+    </style>
+    <script src="Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            divSimpleEvent.onclick = function (e) {
+                alert(e.srcElement.id)
+            }
+
+            $('.jQueryEvent').click(function (e) {
+                alert(e.srcElement.id)
+            })
+
+            var pieConst = 0.314
+            $('#divjQueryEventWithParams').on('click', { dataPie: pieConst }, callFunctionClick);
+        });
+        function inlineEvent(element) { 
+            alert(element.id)
+        }
+        var callFunctionClick = function (e) {
+            alert("element: " + e.srcElement.id + ", data : " + e.data.dataPie)
+        }
+    </script>
+</head>
+<body>
+    <div id="divInlineClick" class="clicker inlineEvent" onclick="inlineEvent(this)">
+    </div>
+    <div id="divSimpleEvent" class="clicker simpleEvent">
+    </div>
+    <div id="divjQueryEvent" class="clicker jQueryEvent">
+    </div>
+    <div id="divjQueryEventWithParams" class="clicker">
+    </div>
+</body>
+</html>

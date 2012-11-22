@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>    
+    <title></title>
+    <style>
+        #divContainer
+        {
+            width:300px;
+            height:900px;
+            background-color:red;
+        }
+    </style>
+    <script src="Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <script>
+        var arr = [{ 'fruit': 'apple', 'color': 'green' }, { 'fruit': 'apple', 'color': 'red' }, { 'fruit': 'banana', 'color': 'yellow'}]
+        var prices = [100,105.5,120.3, 99.1]
+        $(document).ready(function () {
+            // $.each
+            $.each(arr, function (idx, item) {
+                $('#divContainer').append(item.fruit + " " + item.color + '<br/>');
+            })
+
+            // $.grep
+            var arr1 = $.grep(arr, function (item) {
+                return item.fruit === 'apple'
+            });
+            $('#divContainer').append("<br><b>found items:</b><br>");
+            $.each(arr1, function (idx, item) {
+                $('#divContainer').append(item.fruit + " " + item.color + '<br/>');
+            })
+
+            // $.map
+            $('#divContainer').append("<br><b>old prices:</b><br>");
+            $.each(prices, function (idx, item) {
+                $('#divContainer').append(item + '<br/>');
+            })
+            var newPrices = $.map(prices, function (value) {
+                return value * 0.9;
+            });
+            $('#divContainer').append("<br><b>new prices:</b><br>");
+            $.each(newPrices, function (idx, item) {
+                $('#divContainer').append(item + '<br/>');
+            })
+
+            // $.extend
+            var cat = { voice: "miew", whenMad: { action: 'screetch', sound: 'miewww'} }
+            var parrot = { voice: 'kuku', whenMad: { action: 'fly away'} }
+            var newAnimal = $.extend({}, cat, parrot)
+            $('#divContainer').append("<br><br>new animal : voice - "+newAnimal.voice+", when mad - "+newAnimal.whenMad.action, ", sound - " + newAnimal.whenMad.sound);
+        });
+    </script>
+</head>
+<body>
+    <div id="divContainer" >
+    </div>
+</body>
+</html>
