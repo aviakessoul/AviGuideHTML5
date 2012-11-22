@@ -1,7 +1,57 @@
-﻿@color: #666333;
+﻿/* using variables (...yep, they are scoped) */
+
+@color: #666333;
 
 div{
 	width:100px;
 	height:100px;
 	background-color:@color;
+	.divAdded;
+	.border-radius(40px);
 } 
+
+
+/* using Mixins, with and without parameters, also default can be used */
+
+.divAdded{
+	border-style:solid;
+	border-color:green;
+	border-width:10px;
+}
+
+.border-radius (@radius:20px) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+
+/* guarded mixins */
+.mixin (@a) when (lightness(@a) >= 50%) {
+  background-color: black;
+}
+.mixin (@a) when (lightness(@a) < 50%) {
+  background-color: gray;
+}
+.mixin (@a) {
+  color: @a;
+}
+
+#classDark{
+	.mixin(#ddd)
+}
+
+#classLight{
+	.mixin(#555)
+}
+
+
+/* nested rules */
+
+#parent{
+	.nested{
+		width:50px;
+		height:50px;
+		background-color:blue
+	}
+}
