@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>    
+    <link rel="stylesheet/less" type="text/css" href="Styles/less.less">
+    <script src="Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <script>
+        (function ($, global) {
+            jQuery.fn.listSlider = function () {
+                this.children('li').click(function () {
+                    var text = $(this).children('div.panel');
+
+                    if (text.is(':hidden')) {
+                        text.slideDown('200');
+                    } else {
+                        text.slideUp('200');
+                    }
+                })
+            }
+        } (jQuery, window));
+        $(document).ready(function(){
+            $('.toggle-view').listSlider();
+        });
+    </script>
+</head>    
+<body>
+	<ul class="toggle-view" id="toggle-view">
+		<p>Our company deals with solutions from many areas, including</p>
+		<li><span class="btn">Network</span>
+			<div class="panel">
+			<ul class="listinside">
+				<li>Cisco</li>
+				<li>Juniper</li>
+			</ul>
+			</div>
+		</li>
+		<li><span class="btn">Web & Software Development</span>						
+			<div class="panel">						
+			<ul>
+				<li>Java</li>
+				<li>C</li>
+				<li>C++</li>
+				<li>.NET</li>
+				<li>Databases (Oracle, MySQL, SQL Server)</li>
+			</ul>
+			</div>
+		</li>
+		<li><span class="btn">Voice/VoIP</span>
+			<div class="panel">	
+			<ul>
+				<li>PBX</li>
+				<li>H323</li>
+				<li>SIP</li>
+			</ul>
+			</div>
+		</li>
+		<li>RFID</li>
+		<li><span class="btn">Wireless Networking</span>
+			<div class="panel">
+			<ul>
+				<li>Business grade wireless LAN</li>
+				<li>Public wireless LAN</li>
+				<li>Wireless MAN and WAN</li>
+			</ul>
+			</div>
+		<li><span class="btn">Security</span>
+			<div class="panel">
+			<ul>
+				<li>Firealls</li>
+				<li>VPN</li>
+				<li>Remote Access</li>
+			</ul>
+			</div>
+		</li>
+		<li>Improving efficiency and time</li>
+		<li>						
+			<li><span class="btn">Audit</span>
+				<div class="panel">
+				<ul>
+					<li>Reporting</li>
+					<li>Monitoring</li>
+				</ul>
+				</div>
+			</li>						
+		</li> 
+	</ul>
+</body>
+</html>
