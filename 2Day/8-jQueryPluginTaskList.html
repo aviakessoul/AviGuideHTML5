@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="Scripts/jquery-1.8.1.js" type="text/javascript"></script>
+	<script>
+		(function($,win){
+				var taskId = 1;
+				var d = new Date();
+				var curr_date = d.toUTCString();
+				var defaults = {
+					'Title': curr_date
+				}	
+				var settings
+				
+				var arrTasks = []
+				
+				var pluginDefinitions = {}
+				
+				var methods = {
+					init : function( options ) { 
+						settings = $.extend({}, defaults, options);		
+
+						pluginDefinitions.$element = this
+						var div2 = $('<h2>'+settings.Title+'</h2>')
+						this.append(div2);
+						var div = $('<div class=\'inputeContainer\'/>')
+						
+						var inputDateFrom = $('<select class=\'dateFrom\'></select>')						
+						for (var i=8; i<17; i++){
+							inputDateFrom.append('<option value=\''+i+':00\'>'+i+':00</option>')
+						}
+						
+						var inputDateTo = $('<select class=\'dateTo\'></select>')
+						for (var i=8; i<17; i++){
+							inputDateTo.append('<option value=\''+i+':00\'>'+i+':00</option>')
+						}
+						
+						div.append(inputDateFrom);
+						div.append(inputDateTo);
+													
+						var taskInput = $('<input type=text class=\'taskDesc\'></input>')													
+						div.append(taskInput)
+						
+						var buttonAdd = $('<input type=button value=\'Add Task\'></input>')
+						buttonAdd.click(methods.add)
+						div.append(buttonAdd)						
+												
+						this.append(div);
+						
+						return this.each(function() {        
+							$(window).bind('afterAdd.dailyScheduler',methods.afterAdd)
+							$(window).bind('afterRemove.dailyScheduler',methods.afterRemove)
+							$(window).bind('afterRemove.dailyScheduler',methods.afterUpdate)
+						});
+					},
+					add : function() {					
+						
+						arrTasks.push(
+							{
+								id: taskId,
+								taskDesc: $('.taskDesc').val(),
+								taskTo: $('.dateTo').val(),
+								taskFrom: $('.dateFrom').val()							
+							}
+						)
+						
+						taskId++;
+						
+						if (methods.afterAdd !== undefined) {
+							methods.afterAdd()
+						}
+					},
+					remove : function( e ) { 		
+						pluginDefinitions.$element.children().remove('#item'+e.data.itemId)
+						if (methods.afterRemove !== undefined) {
+							methods.afterRemove(e)
+						}
+					},
+					afterAdd : function(){
+						var divItem = $('<div id=\'item'+taskId+'\'></div>')			
+						
+						var itemObj = $.grep(arrTasks,function(item){ return item.id === taskId; })[0]
+						
+						var spanItem = $('<span>From: '+itemObj.taskFrom+',To: '+itemObj.taskTo+',taskDesc: '+itemObj.taskDesc+'<button class=\'buttonItem'+itemObj.id+'\' value=\''+itemObj.id+'\'>Delete Task</button></span>')
+						$('.buttonItem'+itemObj.id).live('click', { itemId : itemObj.id  }, methods.remove )
+						
+						divItem.append(spanItem)
+					
+						pluginDefinitions.$element.append(divItem)
+					},
+					afterRemove : function(e){
+						arrTasks = $.grep(arrTasks,function(item){ return item.id !== e.data.itemId})
+						if (!(typeof console === "undefined"))
+							console.log ('item id ' + e.data.itemId + ' removed')
+					}					
+				};
+		
+				jQuery.fn.dailyScheduler = function(method){
+					// Method calling logic
+					if ( methods[method] ) {
+					  return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+					} else if ( typeof method === 'object' || ! method ) {
+					  return methods.init.apply( this, arguments );
+					} else {
+					  $.error( 'Method ' +  method + ' does not exist on jQuery.dailyScheduler' );
+					}
+				};		
+        } (jQuery, window));
+		$(document).ready(function(){$('#dailyScheduler1').dailyScheduler();})		
+	</script>
+</head>
+<body>
+	<div id="dailyScheduler1">
+	</div>
+</body>
+</html>
